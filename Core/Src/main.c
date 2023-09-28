@@ -68,7 +68,8 @@ int _write(int file,char *ptr, int len)
 uint8_t Rx_data[10];
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-	HAL_UART_Receive_IT(&huart2, Rx_data, 4); //restart the interrupt reception mode
+	HAL_GPIO_TogglePin (GPIOA,GPIO_PIN_5);
+	HAL_UART_Receive_IT(&huart2, Rx_data, 4);//restart the interrupt reception mode
 }
 /**
   * @brief  The application entry point.
@@ -112,9 +113,7 @@ int main(void)
     /* USER CODE BEGIN WHILE */
 while (1)
 {
-      /* USER CODE END WHILE */
-  	  HAL_GPIO_TogglePin (GPIOA,GPIO_PIN_5);
-  	  HAL_Delay (250);
+
 
       /* USER CODE BEGIN 3 */
 }
