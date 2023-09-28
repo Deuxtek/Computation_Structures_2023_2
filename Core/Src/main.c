@@ -56,9 +56,12 @@ static void MX_USART2_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+int _write(int file,char *ptr, int len)
 /* USER CODE END 0 */
-
+{
+	  HAL_UART_Transmit(&huart2, (uint8_t*)ptr,len,10);
+	  return len;
+}
 /**
   * @brief  The application entry point.
   * @retval int
@@ -89,9 +92,13 @@ int main(void)
   MX_GPIO_Init();
   MX_USART2_UART_Init();
   /* USER CODE BEGIN 2 */
-  HAL_UART_Transmit(&huart2, (uint8_t*)"Hello world!/r/n",14,20);
-  /* USER CODE END 2 */
 
+  /* USER CODE END 2 */
+  for (uint8_t idx =0; idx <= 0x0f; idx++)
+    	  printf("IDX: %d\r\n", idx);  // imprimir el str
+    //uint8_t my_str[] ="Hello world!\r\n"; //definir un string
+    //HAL_UART_Transmit(&huart2, my_str, sizeof(my_str)-1, 10);
+    //HAL_UART_Transmit(&huart2, (uint8_t *)"hello world! \r \n", 14, 20);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
